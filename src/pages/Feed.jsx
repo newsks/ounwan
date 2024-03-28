@@ -42,7 +42,7 @@ const Feed = () => {
     );
   };
   const ListHeaderComponent = () => {
-    return <BasicHeader title={'이슈'} />;
+    return <BasicHeader title={'내피드'} />;
   };
 
   return (

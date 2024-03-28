@@ -24,10 +24,10 @@ const MainTab = () => {
         headerShown: false,
       }}>
       <Tab.Screen name="홈" component={Home} />
-      <Tab.Screen name="이슈" component={Feed} />
+      <Tab.Screen name="피드" component={Feed} />
       <Tab.Screen name="오운완인증" component={Add} />
       <Tab.Screen name="채팅" component={Chat} />
-      <Tab.Screen name="나의 오운완" component={MyPage} />
+      <Tab.Screen name="내정보" component={MyPage} />
     </Tab.Navigator>
   );
 };
