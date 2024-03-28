@@ -12,8 +12,8 @@ const Splash = ({navigation}) => {
 
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text style={{color: '#FF7E36', fontSize: 20, fontWeight: 'bold'}}>
-        오운완🔥
+      <Text style={{color: '#4AABFF', fontSize: 20, fontWeight: 'bold'}}>
+        oh! unwan🔥
       </Text>
     </View>
   );
