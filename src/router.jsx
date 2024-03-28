@@ -9,6 +9,7 @@ import MyPage from './pages/MyPage';
 import Chat from './pages/Chat';
 import Add from './pages/Add';
 import Feed from './pages/Feed';
+import SearchList from './pages/SearchList';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -44,6 +45,7 @@ const Router = () => {
         options={{animation: 'fade_from_bottom'}}
       />
       <Stack.Screen name="MainTab" component={MainTab} />
+      <Stack.Screen name="SearchList" component={SearchList} />
     </Stack.Navigator>
   );
 };

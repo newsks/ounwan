@@ -9,66 +9,94 @@ import {
   FlatList,
   Dimensions,
   StyleSheet,
+  useWindowDimensions,
 } from 'react-native';
 import BasicHeader from '../components/BasicHeader';
 
 const Feed = () => {
+  const {width} = useWindowDimensions();
+
+  const renderItem = ({item, index}) => {
+    return (
+      <TouchableOpacity
+        style={{borderWidth: 0.5, borderColor: '#FFF', position: 'relative'}}>
+        {item.isMulti && (
+          <Image
+            source={multiPhoto}
+            style={{
+              width: 24,
+              height: 24,
+              position: 'absolute',
+              top: 4,
+              right: 4,
+              zIndex: 1,
+            }}
+          />
+        )}
+
+        <Image
+          source={{uri: item.img}}
+          style={{width: width / 3 - 1, height: width / 3 - 1}}
+        />
+      </TouchableOpacity>
+    );
+  };
+  const ListHeaderComponent = () => {
+    return <BasicHeader title={'이슈'} />;
+  };
+
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#FFF'}}>
-      <BasicHeader title="핫이슈" />
+      <View style={{flex: 1}}>
+        <FlatList
+          data={dummy_search}
+          keyExtractor={item => item.id}
+          renderItem={renderItem}
+          ListHeaderComponent={ListHeaderComponent}
+          numColumns={3}
+          showsVerticalScrollIndicator={false}
+          removeClippedSubviews
+        />
+      </View>
     </SafeAreaView>
   );
 };
 
 export default Feed;
 
-const styles = StyleSheet.create({
-  mainContainer: {
-    padding: 16,
-    flexDirection: 'row',
-    position: 'relative',
+const styles = StyleSheet.create({});
+
+const searchIcon = require('../assets/icons/search.png');
+const multiPhoto = require('../assets/icons/multiPhoto.png');
+const dummy_search = [
+  {
+    id: 1,
+    img: 'https://picsum.photos/seed/picsum/130/130',
+    isMulti: true,
   },
-  productImg: {
-    width: 110,
-    height: 110,
-    borderRadius: 4,
-    marginRight: 16,
+  {
+    id: 2,
+    img: 'https://picsum.photos/seed/picsum/130/130',
+    isMulti: true,
   },
-  titleText: {
-    fontSize: 16,
-    color: '#000',
-    fontWeight: '500',
+  {
+    id: 3,
+    img: 'https://picsum.photos/seed/picsum/130/130',
+    isMulti: false,
   },
-  subText: {
-    fontSize: 14,
-    color: '#8C8C8C',
-    marginVertical: 4,
+  {
+    id: 4,
+    img: 'https://picsum.photos/seed/picsum/130/130',
+    isMulti: false,
   },
-  price: {
-    fontSize: 18,
-    color: '#FF7E36',
-    fontWeight: 'bold',
+  {
+    id: 5,
+    img: 'https://picsum.photos/seed/picsum/130/130',
+    isMulti: true,
   },
-  commentArea: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 2,
-    marginRight: 4,
+  {
+    id: 6,
+    img: 'https://picsum.photos/seed/picsum/130/130',
+    isMulti: true,
   },
-  writeButton: {
-    position: 'absolute',
-    bottom: 100,
-    right: 16,
-    backgroundColor: '#FF6D1D',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  writeText: {
-    fontSize: 18,
-    fontWeight: '500',
-    color: '#FFF',
-  },
-});
+];

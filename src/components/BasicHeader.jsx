@@ -21,7 +21,7 @@ const BasicHeader = ({title}) => {
         <Text style={styles.headerTitle}>{title}</Text>
       </View>
       <View style={{flexDirection: 'row', gap: 16}}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('SearchList')}>
           <Image source={search} style={{width: 28, height: 28}} />
         </TouchableOpacity>
         <TouchableOpacity>

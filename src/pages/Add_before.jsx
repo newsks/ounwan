@@ -8,8 +8,6 @@ import {
   Dimensions,
   ScrollView,
   StyleSheet,
-  TextInput,
-  Button,
 } from 'react-native';
 import {PermissionsAndroid, Platform} from 'react-native';
 import {CameraRoll} from '@react-native-camera-roll/camera-roll';
@@ -17,7 +15,6 @@ import {launchImageLibrary} from 'react-native-image-picker';
 import {useFocusEffect} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import BasicHeader from '../components/BasicHeader';
-import {usePhotos} from '../context/PhotoContext';
 
 async function hasAndroidPermission() {
   const getCheckPermissionPromise = () => {
@@ -77,19 +74,7 @@ async function savePicture(tag, type = 'photo', album = null) {
 const {width} = Dimensions.get('window');
 
 const Add = () => {
-  const {setPhotos} = usePhotos();
   const [selectedPhotos, setSelectedPhotos] = useState([]);
-  const [title, setTitle] = useState(''); // 타이틀을 위한 상태
-  const [content, setContent] = useState(''); // 내용을 위한 상태
-
-  const savePhotoInfo = photoInfo => {
-    // setPhotos(prevPhotos => [...prevPhotos, photoInfo]);
-
-    // 타이틀과 내용을 포함하여 선택된 사진 정보를 저장하는 로직을 구현합니다.
-
-    console.log('저장된 사진 정보:', {title, content, selectedPhotos});
-    // 실제 앱에서는 AsyncStorage나 서버에 저장하는 로직이 추가될 수 있습니다.
-  };
 
   useEffect(() => {
     requestGalleryPermission();
@@ -165,33 +150,16 @@ const Add = () => {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#FFF'}}>
       <BasicHeader title="오운완 인증하기" />
-      <View style={{padding: 20}}>
-        <TextInput
-          placeholder="타이틀 입력"
-          placeholderTextColor={'#777'}
-          value={title}
-          onChangeText={setTitle}
-          style={styles.input}
-        />
-        <TextInput
-          placeholder="내용 입력"
-          value={content}
-          onChangeText={setContent}
-          style={styles.input}
-          multiline
-        />
-        <Button title="완료" onPress={savePhotoInfo} />
-      </View>
+
       <ScrollView style={{flex: 1, backgroundColor: '#000'}}>
         <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
-          {selectedPhotos &&
-            selectedPhotos.map((photo, index) => (
-              <Image
-                key={index}
-                source={photo}
-                style={{width: width / 3, height: width / 3}}
-              />
-            ))}
+          {selectedPhotos.map((photo, index) => (
+            <Image
+              key={index}
+              source={photo}
+              style={{width: width, height: width}}
+            />
+          ))}
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -201,12 +169,52 @@ const Add = () => {
 export default Add;
 
 const styles = StyleSheet.create({
-  input: {
-    borderWidth: 1,
-    borderColor: '#ddd',
-    padding: 10,
-    marginBottom: 20,
-    borderRadius: 5,
+  mainContainer: {
+    padding: 16,
+    flexDirection: 'row',
+    position: 'relative',
+  },
+  productImg: {
+    width: 110,
+    height: 110,
+    borderRadius: 4,
+    marginRight: 16,
+  },
+  titleText: {
+    fontSize: 16,
     color: '#000',
+    fontWeight: '500',
+  },
+  subText: {
+    fontSize: 14,
+    color: '#8C8C8C',
+    marginVertical: 4,
+  },
+  price: {
+    fontSize: 18,
+    color: '#FF7E36',
+    fontWeight: 'bold',
+  },
+  commentArea: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 2,
+    marginRight: 4,
+  },
+  writeButton: {
+    position: 'absolute',
+    bottom: 100,
+    right: 16,
+    backgroundColor: '#FF6D1D',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  writeText: {
+    fontSize: 18,
+    fontWeight: '500',
+    color: '#FFF',
   },
 });
