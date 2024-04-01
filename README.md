@@ -26,12 +26,12 @@
 
 ## 🔥 회원가입
 
-| <p align="center">![preview](./src/assets/result/result10.gif)</p> |
+ <p align="center"><img src="./src/assets/result/result10.gif"/></p>
 
 ## 🔥 comment 등록
 
-| <p align="center">![preview](./src/assets/result/result11.gif)</p> |
+<p align="center"><img src="./src/assets/result/result11.gif"/></p>
 
 ## 🔥 오운완 등록 및 삭제
 
-| <p align="center">![preview](./src/assets/result/add.gif)</p> |
+<p align="center"><img src="./src/assets/result/add.gif"/></p>
