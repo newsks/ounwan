@@ -17,10 +17,10 @@ const DetailHeader = ({title}) => {
   const navigation = useNavigation();
   return (
     <View style={styles.headerWrapper}>
-      <View style={{flexDirection: 'row', alignItems: 'center', gap: 6}}>
-        <Text style={styles.headerTitle}>{title}</Text>
+      <View style={styles.headerLeft}>
+        <Image source={back} style={{width: 28, height: 28}} />
       </View>
-      <View style={{flexDirection: 'row', gap: 16}}>
+      <View style={styles.headerRight}>
         <TouchableOpacity onPress={() => navigation.navigate('SearchList')}>
           <Image source={share} style={{width: 28, height: 28}} />
         </TouchableOpacity>
@@ -44,6 +44,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderBottomWidth: 1,
     borderBottomColor: '#EAEAEA',
+  },
+  headerLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+  },
+  headerRight: {
+    flexDirection: 'row',
+    gap: 16,
   },
   sortButton: {
     width: 14,

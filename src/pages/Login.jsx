@@ -19,7 +19,7 @@ const showToast = message => {
   });
 };
 
-const Login = () => {
+const Login = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -81,7 +81,7 @@ const Login = () => {
             />
           </View>
           <View style={styles.joinContainer}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('Join')}>
               <Text style={styles.joinText}>회원가입</Text>
             </TouchableOpacity>
             <View style={styles.findContainer}>
@@ -130,6 +130,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     margin: 5,
     marginBottom: 10,
+    color: '#000',
   },
   joinContainer: {
     marginTop: 14,

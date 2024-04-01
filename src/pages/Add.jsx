@@ -10,6 +10,8 @@ import {
   StyleSheet,
   TextInput,
   Button,
+  Keyboard,
+  Alert,
 } from 'react-native';
 import {PermissionsAndroid, Platform} from 'react-native';
 import {CameraRoll} from '@react-native-camera-roll/camera-roll';
@@ -18,6 +20,15 @@ import {useFocusEffect} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import BasicHeader from '../components/BasicHeader';
 import {usePhotos} from '../context/PhotoContext';
+import Toast from 'react-native-toast-message';
+
+const showToast = message => {
+  Toast.show({
+    type: 'info',
+    text1: message,
+    position: 'top',
+  });
+};
 
 async function hasAndroidPermission() {
   const getCheckPermissionPromise = () => {
@@ -70,7 +81,6 @@ async function savePicture(tag, type = 'photo', album = null) {
   if (Platform.OS === 'android' && !(await hasAndroidPermission())) {
     return;
   }
-  // 올바른 사용 예시로 수정
   CameraRoll.save(tag, {type: type, album: album});
 }
 
@@ -85,21 +95,22 @@ const Add = () => {
   const savePhotoInfo = photoInfo => {
     // setPhotos(prevPhotos => [...prevPhotos, photoInfo]);
 
-    // 타이틀과 내용을 포함하여 선택된 사진 정보를 저장하는 로직을 구현합니다.
-
     console.log('저장된 사진 정보:', {title, content, selectedPhotos});
-    // 실제 앱에서는 AsyncStorage나 서버에 저장하는 로직이 추가될 수 있습니다.
+    showToast('글이 등록되었습니다.');
+
+    setTitle('');
+    setContent('');
+
+    Keyboard.dismiss();
   };
 
   useEffect(() => {
     requestGalleryPermission();
-    loadSelectedPhotos(); // 앱 시작 시 저장된 이미지 불러오기
+    loadSelectedPhotos();
   }, []);
 
-  // useFocusEffect를 사용하여 탭이 포커스될 때마다 실행될 로직을 정의합니다.
   useFocusEffect(
     useCallback(() => {
-      // 이곳에 이미지 선택기를 열기 위한 함수 호출을 추가합니다.
       requestGalleryPermission();
     }, []),
   );
@@ -157,9 +168,35 @@ const Add = () => {
         saveSelectedPhotoUris([
           ...selectedPhotos.map(photo => photo.uri),
           response.assets[0].uri,
-        ]); // 선택된 이미지 URI들 저장
+        ]);
       }
     });
+  };
+
+  const removePhoto = uriToRemove => {
+    setSelectedPhotos(currentPhotos =>
+      currentPhotos.filter(photo => photo.uri !== uriToRemove),
+    );
+    saveSelectedPhotoUris(
+      selectedPhotos
+        .filter(photo => photo.uri !== uriToRemove)
+        .map(photo => photo.uri),
+    );
+  };
+
+  const confirmRemovePhoto = uri => {
+    Alert.alert(
+      '사진 삭제',
+      '정말 이 사진을 삭제하시겠습니까?',
+      [
+        {
+          text: '아니오',
+          style: 'cancel',
+        },
+        {text: '예', onPress: () => removePhoto(uri)},
+      ],
+      {cancelable: false},
+    );
   };
 
   return (
@@ -186,11 +223,16 @@ const Add = () => {
         <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
           {selectedPhotos &&
             selectedPhotos.map((photo, index) => (
-              <Image
+              <TouchableOpacity
                 key={index}
-                source={photo}
-                style={{width: width / 3, height: width / 3}}
-              />
+                onLongPress={() => confirmRemovePhoto(photo.uri)} // 길게 눌렀을 때 이벤트
+              >
+                <Image
+                  key={index}
+                  source={photo}
+                  style={{width: width / 3, height: width / 3}}
+                />
+              </TouchableOpacity>
             ))}
         </View>
       </ScrollView>

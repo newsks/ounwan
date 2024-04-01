@@ -26,12 +26,11 @@ const MainTab = () => {
       screenOptions={{
         headerShown: false,
       }}>
-      {/* <Tab.Screen name="홈" component={Home} /> */}
-      <Tab.Screen name="디테일" component={Detail} />
-      <Tab.Screen name="피드" component={Feed} />
+      <Tab.Screen name="홈" component={Home} />
+      <Tab.Screen name="피드" component={Detail} />
       <Tab.Screen name="오운완인증" component={Add} />
       <Tab.Screen name="채팅" component={Chat} />
-      <Tab.Screen name="내정보" component={MyPage} />
+      <Tab.Screen name="내정보" component={Join} />
     </Tab.Navigator>
   );
 };
@@ -52,6 +51,7 @@ const Router = () => {
       <Stack.Screen name="SearchList" component={SearchList} />
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Join" component={Join} />
+      <Stack.Screen name="Detail" component={Detail} />
     </Stack.Navigator>
   );
 };

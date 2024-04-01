@@ -1,79 +1,37 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# 💫 Oh! unwan
 
-# Getting Started
+### 💫 프로젝트 목표
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+- React Native를 이용해 오늘의 운동을 인증하는 SNS인 “오운완(오늘 운동 완료의 약자로, 운동을 완수한 후 인증을 남기는 용어 이하 오운완)” 앱을 구현하는데 목적
 
-## Step 1: Start the Metro Server
+## 🔥 페이지별 화면
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+</br>
 
-To start Metro, run the following command from the _root_ of your React Native project:
+| <p align="center">홈</p>                                           | <p align="center">피드상세</p>                                         |
+| ------------------------------------------------------------------ | ---------------------------------------------------------------------- |
+| <p align="center">![preview](./src/assets/result/result02.jpg)</p> | <p align="center">![preview](./src/assets/result/result01.jpg)</p></p> |
 
-```bash
-# using npm
-npm start
+| <p align="center">오운완인증추가</p>                               | <p align="center">오운완인증삭제</p>                                   |
+| ------------------------------------------------------------------ | ---------------------------------------------------------------------- |
+| <p align="center">![preview](./src/assets/result/result07.jpg)</p> | <p align="center">![preview](./src/assets/result/result08.jpg)</p></p> |
 
-# OR using Yarn
-yarn start
-```
+| <p align="center">채팅</p>                                         | <p align="center">설정</p>                                         |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| <p align="center">![preview](./src/assets/result/result03.jpg)</p> | <p align="center">![preview](./src/assets/result/result04.jpg)</p> |
 
-## Step 2: Start your Application
+| <p align="center">로그인</p>                                       | <p align="center">회원가입</p>                                     |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| <p align="center">![preview](./src/assets/result/result05.jpg)</p> | <p align="center">![preview](./src/assets/result/result06.jpg)</p> |
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+## 🔥 회원가입
 
-### For Android
+| <p align="center">![preview](./src/assets/result/result10.gif)</p> |
 
-```bash
-# using npm
-npm run android
+## 🔥 comment 등록
 
-# OR using Yarn
-yarn android
-```
+| <p align="center">![preview](./src/assets/result/result11.gif)</p> |
 
-### For iOS
+## 🔥 오운완 등록 및 삭제
 
-```bash
-# using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
-
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
-
-## Step 3: Modifying your App
-
-Now that you have successfully run the app, let's modify it.
-
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
-
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+| <p align="center">![preview](./src/assets/result/add.gif)</p> |

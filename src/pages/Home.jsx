@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   SafeAreaView,
   View,
@@ -13,12 +13,15 @@ import {
 import BasicHeader from '../components/BasicHeader';
 import CommentsModal from '../components/CommentsModal';
 import {usePhotos} from '../context/PhotoContext';
+import {getAppVersion} from '../apis/basic';
+import {signUp} from '../apis/user';
 
-// 더미 이미지 URL
-const DUMMY_IMAGE =
-  'https://images.unsplash.com/photo-1485727749690-d091e8284ef3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzA4fHxoZWFsdGh8ZW58MHx8MHx8fDA%3D';
+const Home = ({navigation}) => {
+  useEffect(() => {
+    // getAppVersion();
+    signUp();
+  }, []);
 
-const Home = () => {
   const {photos} = usePhotos();
   const [isVisible, setIsVisible] = useState(false);
 
@@ -45,7 +48,9 @@ const Home = () => {
             <Image source={moreIcon} style={styles.moreIcon} />
           </TouchableOpacity>
         </View>
-        <View style={{paddingHorizontal: 16}}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Detail')}
+          style={{paddingHorizontal: 16}}>
           <Image
             source={{uri: imageURI}}
             style={{
@@ -55,7 +60,7 @@ const Home = () => {
             }}
             resizeMode="cover"
           />
-        </View>
+        </TouchableOpacity>
 
         {/* 좋아요 댓글 좋아합니다 */}
         <View style={styles.likeContainer}>

@@ -13,7 +13,6 @@ import {
 } from 'react-native';
 import {launchImageLibrary} from 'react-native-image-picker';
 import Toast from 'react-native-toast-message';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoginHeader from '../components/LoginHeader';
 
 const showToast = message => {
@@ -62,40 +61,53 @@ const Join = ({navigation}) => {
     });
   };
 
-  // 회원가입 정보를 로컬 스토리지에 저장하는 함수
-  const storeUserData = async (email, nickname) => {
-    try {
-      const userData = JSON.stringify({email, nickname});
-      await AsyncStorage.setItem('userData', userData);
-    } catch (error) {
-      console.error('로컬 스토리지 저장 중 에러 발생:', error);
-    }
-  };
-
   const handleSignUp = async () => {
     if (email === '' || password === '' || nickname === '') {
       showToast('모든 필드를 입력해주세요.');
+      // Alert.alert('오류', '모든 필드를 입력해주세요.');
       return;
     }
     if (password !== confirmPassword) {
       showToast('비밀번호가 일치하지 않습니다.');
+      // Alert.alert('오류', '비밀번호가 일치하지 않습니다.');
       return;
     }
 
-    try {
-      // 로컬 스토리지에 사용자 정보 저장
-      await storeUserData(email, nickname);
-      showToast('회원가입이 완료되었습니다.');
+    const formData = new FormData();
+    formData.append('email', email);
+    formData.append('password', password);
+    formData.append('nickname', nickname);
 
-      // 모든 입력 필드 초기화
-      setEmail('');
-      setPassword('');
-      setConfirmPassword('');
-      setNickname('');
-      setProfileImage(null);
+    if (profileImage) {
+      formData.append('profileImage', {
+        uri: profileImage.uri,
+        type: 'image/jpeg',
+        name: 'profile.jpg',
+      });
+    }
+
+    try {
+      const response = await fetch('http://54.180.90.124:8080/accounts', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      const json = await response.json();
+
+      if (response.ok) {
+        showToast('회원가입이 완료되었습니다.');
+        // Alert.alert('성공', '회원가입이 완료되었습니다.');
+        // 회원가입 성공 후 처리 로직
+      } else {
+        Alert.alert('실패', json.message || '회원가입에 실패했습니다.');
+      }
     } catch (error) {
-      console.error('회원가입 과정에서 오류 발생:', error);
-      Alert.alert('실패', '회원가입 과정에서 오류가 발생했습니다.');
+      console.error('회원가입 중 에러 발생:', error);
+      showToast('회원가입 중 문제가 발생했습니다.');
+      // Alert.alert('회원가입 에러', '회원가입 중 문제가 발생했습니다.');
     }
   };
 
